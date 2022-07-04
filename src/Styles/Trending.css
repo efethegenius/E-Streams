@@ -1,0 +1,35 @@
+.trending-movies-container {
+  width: 100%;
+  overflow-y: scroll;
+  display: grid;
+  grid-auto-flow: column;
+  padding: 0 15px;
+}
+
+.movie {
+  width: 240px;
+  height: 140px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+}
+
+.trending-movies-details {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+}
+
+.trending-movies-details p {
+  font-size: 0.7rem;
+}
+
+.trending-movies-details h3 {
+  font-size: 0.9rem;
+}

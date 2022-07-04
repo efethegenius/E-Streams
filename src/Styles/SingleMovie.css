@@ -1,0 +1,142 @@
+.single-movie-container img {
+  width: 60% !important;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-radius: 7px;
+}
+
+.single-movie-container {
+  padding: 0 10px !important;
+}
+
+.single-movie-container h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.rating {
+  margin-bottom: 20px;
+}
+
+.overview {
+  text-align: left;
+  line-height: 25px;
+}
+
+.casts-container {
+  /* background-color: red; */
+  display: flex;
+  width: 100%;
+  /* padding: 10px; */
+  align-items: flex-start;
+  margin-top: 10px;
+  flex-direction: column;
+}
+
+.casts-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.cast-name {
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 4px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.great {
+  background-color: green;
+  color: white;
+  padding: 2px 9px;
+  border-radius: 3px;
+}
+.good {
+  background-color: rgb(180, 102, 0);
+  padding: 2px 9px;
+  border-radius: 3px;
+  color: white;
+}
+.bad {
+  background-color: rgb(180, 0, 0);
+  color: white;
+  padding: 2px 9px;
+  border-radius: 3px;
+}
+
+.tagline {
+  margin-bottom: 20px;
+  color: #86888d;
+  font-size: 0.9rem;
+}
+
+.movie-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* background-color: red; */
+  width: 100%;
+  justify-items: center;
+  margin-bottom: 40px;
+  margin-top: 10px;
+}
+
+.movie-stat p {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.movie-stats h5 {
+  color: #86888d;
+  margin-bottom: 5px;
+}
+
+.movie-stat {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.overview-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.overview-container h4 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.link {
+  background-color: #5a6a90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 160px;
+  height: 44px;
+  text-decoration: none !important;
+  color: white;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.links-container {
+  /* background-color: red; */
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
