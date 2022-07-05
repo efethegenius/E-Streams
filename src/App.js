@@ -3,6 +3,7 @@ import "../src/Styles/Home.css";
 import "../src/Styles/Series.css";
 import "../src/Styles/Trending.css";
 import "../src/Styles/SingleMovie.css";
+import "../src/Styles/Input.css";
 import { Home } from "./Pages/Home";
 import {
   BrowserRouter as Router,

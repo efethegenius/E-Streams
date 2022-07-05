@@ -12,36 +12,48 @@ export const Movies = () => {
   return (
     <div className="movies-container">
       <Navbar />
-      <div className="search-container">
-        <input placeholder="seatch for movies or tv series" />
-      </div>
-      <div className="title-container">
-        <h3>Now Playing</h3>
-      </div>
-      <div className="series-container">
-        {data.map((movie) => {
-          const { poster_path, id, backdrop_path, release_date, title } = movie;
-          const newDate = new Date(release_date);
-          return (
-            <Link to={`/now_playing/${id}`} className="show-link">
-              <div key={id} className="series">
-                <img src={img_path + poster_path} alt="image" />
-                <div className="show-details">
-                  <p>{newDate.getFullYear()}</p>
-                  <h4>{title}</h4>
+      <div className="movie-wrapper">
+        <div className="search-container">
+          <div class="form">
+            <input
+              class="input"
+              placeholder="Search for Movies or TV series"
+              required=""
+              type="text"
+            />
+            <span class="input-border"></span>
+          </div>
+          <span class="input-border"></span>
+        </div>
+        <div className="title-container">
+          <h3>Now Playing</h3>
+        </div>
+        <div className="series-container">
+          {data.map((movie) => {
+            const { poster_path, id, backdrop_path, release_date, title } =
+              movie;
+            const newDate = new Date(release_date);
+            return (
+              <Link to={`/now_playing/${id}`} className="show-link">
+                <div key={id} className="series">
+                  <img src={img_path + poster_path} alt="image" />
+                  <div className="show-details">
+                    <p>{newDate.getFullYear()}</p>
+                    <h4>{title}</h4>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          );
-        })}
-        <div>
-          <button onClick={() => setNowPlayingPage(nowPlayingPage - 1)}>
-            -
-          </button>
-          <p>Page: {nowPlayingPage}</p>
-          <button onClick={() => setNowPlayingPage(nowPlayingPage + 1)}>
-            +
-          </button>
+              </Link>
+            );
+          })}
+          <div>
+            <button onClick={() => setNowPlayingPage(nowPlayingPage - 1)}>
+              -
+            </button>
+            <p>Page: {nowPlayingPage}</p>
+            <button onClick={() => setNowPlayingPage(nowPlayingPage + 1)}>
+              +
+            </button>
+          </div>
         </div>
       </div>
     </div>

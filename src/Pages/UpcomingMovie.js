@@ -47,75 +47,79 @@ export const UpcomingMovie = () => {
   return (
     <div className="movies-container single-movie-container">
       <Navbar />
-      <img src={img_path + image} alt="image" />
-      <h3>{title}</h3>
-      <p className="tagline">{details.tagline}</p>
-      <p className="rating">
-        Rating:{" "}
-        <span
-          className={
-            parseInt(rating) <= 4.5
-              ? "bad"
-              : parseInt(rating) <= 6.5
-              ? "good"
-              : "great"
-          }
-        >
-          {rating}
-        </span>
-      </p>
-      <div className="movie-stats">
-        <div className="movie-stat">
-          <h5>Length</h5>
-          <p>{details.runtime + " min."}</p>
-        </div>
-        <div className="movie-stat">
-          <h5>Language</h5>
-          <p>{details.original_language}</p>
-        </div>
-        <div className="movie-stat">
-          <h5>Year</h5>
-          <p>{newDate.getFullYear()}</p>
-        </div>
-        <div className="movie-stat">
-          <h5>Status</h5>
-          <p>{details.status}</p>
-        </div>
-      </div>
-      <div className="overview-container">
-        <h4>Overview</h4>
-        <p className="overview">{overview}</p>
-      </div>
-      <div className="links-container">
-        <a
-          className="link"
-          href={details.homepage}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Website <FaLink />
-        </a>
+      <div className="all-movie">
+        <img src={img_path + image} alt="image" />
+        <div className="full-movie">
+          <h3>{title}</h3>
+          <p className="tagline">{details.tagline}</p>
+          <p className="rating">
+            Rating:{" "}
+            <span
+              className={
+                parseInt(rating) <= 4.5
+                  ? "bad"
+                  : parseInt(rating) <= 6.5
+                  ? "good"
+                  : "great"
+              }
+            >
+              {rating}
+            </span>
+          </p>
+          <div className="movie-stats">
+            <div className="movie-stat">
+              <h5>Length</h5>
+              <p>{details.runtime + " min."}</p>
+            </div>
+            <div className="movie-stat">
+              <h5>Language</h5>
+              <p>{details.original_language}</p>
+            </div>
+            <div className="movie-stat">
+              <h5>Year</h5>
+              <p>{newDate.getFullYear()}</p>
+            </div>
+            <div className="movie-stat">
+              <h5>Status</h5>
+              <p>{details.status}</p>
+            </div>
+          </div>
+          <div className="overview-container">
+            <h4>Overview</h4>
+            <p className="overview">{overview}</p>
+          </div>
+          <div className="links-container">
+            <a
+              className="link"
+              href={details.homepage}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Website <FaLink />
+            </a>
 
-        <a
-          className="link"
-          href={`https://www.imdb.com/title/${details.imdb_id}`}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          IMDB <FaImdb />
-        </a>
-      </div>
-      <div className="casts-container">
-        <h4>Casts</h4>
-        <div className="casts-wrapper">
-          {cast.map((casts) => {
-            const { id, name } = casts;
-            return (
-              <p key={id} className="cast-name">
-                {name}
-              </p>
-            );
-          })}
+            <a
+              className="link"
+              href={`https://www.imdb.com/title/${details.imdb_id}`}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              IMDB <FaImdb />
+            </a>
+          </div>
+          <div className="casts-container">
+            <h4>Casts</h4>
+            <div className="casts-wrapper">
+              {cast.map((casts) => {
+                const { id, name } = casts;
+                return (
+                  <p key={id} className="cast-name">
+                    {name}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

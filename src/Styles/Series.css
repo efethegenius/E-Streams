@@ -15,3 +15,9 @@
 .series img {
   width: 100%;
 }
+
+@media screen and (min-width: 640px) {
+  .series-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}

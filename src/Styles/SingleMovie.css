@@ -3,10 +3,28 @@
   margin-top: 20px;
   margin-bottom: 30px;
   border-radius: 7px;
+  max-width: 350px;
 }
 
 .single-movie-container {
   padding: 0 10px !important;
+}
+
+.full-movie {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 650px;
+}
+
+.all-movie {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 .single-movie-container h3 {
@@ -33,15 +51,23 @@
   align-items: flex-start;
   margin-top: 10px;
   flex-direction: column;
+  margin-bottom: 30px;
 }
 
 .casts-wrapper {
-  width: 100%;
+  /* width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px; */
   display: flex;
   align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 20px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.casts-container h4 {
+  margin-bottom: 10px;
 }
 
 .cast-name {
@@ -49,7 +75,7 @@
   border-radius: 4px;
   padding: 4px;
   font-size: 12px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .great {
@@ -139,4 +165,71 @@
   justify-content: center;
   flex-direction: column;
   margin-top: 30px;
+}
+
+@media screen and (min-width: 775px) {
+  .all-movie {
+    /* background-color: red; */
+    display: grid;
+    grid-template-columns: 45% 55%;
+    margin-top: 30px;
+    justify-items: center;
+  }
+
+  .all-movie img {
+    align-self: start;
+    width: 85% !important;
+    margin: unset;
+  }
+  .full-movie {
+    align-items: flex-start !important;
+  }
+
+  .movie-stats {
+    justify-items: flex-start !important;
+    font-size: 1.2rem;
+  }
+  .full-movie h3 {
+    text-align: left !important;
+    font-size: 2.7rem;
+    font-weight: 400 !important;
+  }
+  .tagline {
+    font-size: 1.1rem;
+  }
+  .links-container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: unset;
+  }
+  .link {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (min-width: 1020px) {
+  .all-movie {
+    width: calc(100% - 140px) !important;
+    position: absolute;
+    right: 0;
+  }
+  .full-movie {
+    justify-self: flex-start;
+  }
+  .full-movie h4 {
+    font-size: 1.3rem;
+  }
+  .single-movie-container img {
+    max-width: unset !important;
+  }
+}
+@media screen and (min-width: 1150px) {
+  .all-movie {
+    grid-template-columns: 40% 60%;
+  }
+
+  .single-movie-container img {
+    width: 75% !important;
+  }
 }

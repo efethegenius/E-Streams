@@ -48,69 +48,73 @@ export const PopularSerie = () => {
   return (
     <div className="movies-container single-movie-container">
       <Navbar />
-      <img src={img_path + image} alt="image" />
-      <h3>{title}</h3>
-      <p className="tagline">{details.tagline}</p>
-      <p className="rating">
-        Rating:{" "}
-        <span
-          className={
-            parseInt(rating) <= 4.5
-              ? "bad"
-              : parseInt(rating) <= 6.5
-              ? "good"
-              : "great"
-          }
-        >
-          {rating}
-        </span>
-      </p>
-      <div className="movie-stats">
-        <div className="movie-stat">
-          <h5>Language</h5>
-          <p>{details.original_language}</p>
-        </div>
-        <div className="movie-stat">
-          <h5>First Air</h5>
-          <p>{details.first_air_date}</p>
-        </div>
+      <div className="all-movie">
+        <img src={img_path + image} alt="image" />
+        <div className="full-movie">
+          <h3>{title}</h3>
+          <p className="tagline">{details.tagline}</p>
+          <p className="rating">
+            Rating:{" "}
+            <span
+              className={
+                parseInt(rating) <= 4.5
+                  ? "bad"
+                  : parseInt(rating) <= 6.5
+                  ? "good"
+                  : "great"
+              }
+            >
+              {rating}
+            </span>
+          </p>
+          <div className="movie-stats">
+            <div className="movie-stat">
+              <h5>Language</h5>
+              <p>{details.original_language}</p>
+            </div>
+            <div className="movie-stat">
+              <h5>First Air</h5>
+              <p>{details.first_air_date}</p>
+            </div>
 
-        <div className="movie-stat">
-          <h5>Last Air</h5>
-          <p>{details.last_air_date}</p>
-        </div>
-        <div className="movie-stat">
-          <h5>Status</h5>
-          <p>{details.status}</p>
-        </div>
-      </div>
-      <div className="overview-container">
-        <h4>Overview</h4>
-        <p className="overview">{overview}</p>
-      </div>
+            <div className="movie-stat">
+              <h5>Last Air</h5>
+              <p>{details.last_air_date}</p>
+            </div>
+            <div className="movie-stat">
+              <h5>Status</h5>
+              <p>{details.status}</p>
+            </div>
+          </div>
+          <div className="overview-container">
+            <h4>Overview</h4>
+            <p className="overview">{overview}</p>
+          </div>
 
-      <div className="links-container">
-        <a
-          className="link"
-          href={details.homepage}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Website <FaLink />
-        </a>
-      </div>
+          <div className="links-container">
+            <a
+              className="link"
+              href={details.homepage}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Website <FaLink />
+            </a>
+          </div>
 
-      <div className="casts-container">
-        <h4>Casts</h4>
-        <div className="casts-wrapper">
-          {cast.map((casts) => {
-            const { id, name } = casts;
-            return (
-              <p key={id} className="cast-name">
-                {name}
-              </p>
-            );
-          })}
+          <div className="casts-container">
+            <h4>Casts</h4>
+            <div className="casts-wrapper">
+              {cast.map((casts) => {
+                const { id, name } = casts;
+                return (
+                  <p key={id} className="cast-name">
+                    {name}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

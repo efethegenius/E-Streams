@@ -13,36 +13,45 @@ export const TvSeries = () => {
   return (
     <div className="movies-container">
       <Navbar />
-      <div className="search-container">
-        <p>ICO</p>
-        <input placeholder="seatch for movies or tv series" />
-        <button>Search</button>
-      </div>
-      <div className="title-container">
-        <h3>Airing Today</h3>
-      </div>
-      <div className="series-container">
-        {data.map((movie) => {
-          const {
-            poster_path,
-            id,
-            backdrop_path,
-            first_air_date,
-            original_name,
-          } = movie;
-          const newDate = new Date(first_air_date);
-          return (
-            <Link to={`/airing_today/${id}`} className="show-link">
-              <div key={id} className="series">
-                <img src={img_path + poster_path} alt="image" />
-                <div className="show-details">
-                  <p>{newDate.getFullYear()}</p>
-                  <h4>{original_name}</h4>
+      <div className="movie-wrapper">
+        <div className="search-container">
+          <div class="form">
+            <input
+              class="input"
+              placeholder="Search for Movies or TV series"
+              required=""
+              type="text"
+            />
+            <span class="input-border"></span>
+          </div>
+          <span class="input-border"></span>
+        </div>
+        <div className="title-container">
+          <h3>Airing Today</h3>
+        </div>
+        <div className="series-container">
+          {data.map((movie) => {
+            const {
+              poster_path,
+              id,
+              backdrop_path,
+              first_air_date,
+              original_name,
+            } = movie;
+            const newDate = new Date(first_air_date);
+            return (
+              <Link to={`/airing_today/${id}`} className="show-link">
+                <div key={id} className="series">
+                  <img src={img_path + poster_path} alt="image" />
+                  <div className="show-details">
+                    <p>{newDate.getFullYear()}</p>
+                    <h4>{original_name}</h4>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          );
-        })}
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
