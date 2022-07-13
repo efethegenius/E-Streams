@@ -10,6 +10,11 @@
 
 .series {
   margin-bottom: 20px;
+  transition: all ease-in-out 0.4s;
+}
+
+.series:hover {
+  transform: scale(1.05);
 }
 
 .series img {

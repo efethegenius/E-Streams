@@ -44,7 +44,17 @@ export const TvSeries = () => {
           })}
         </div>
         <div className="page">
-          <button onClick={() => setAiringPage(airingPage - 1)}>-</button>
+          <button
+            onClick={() => {
+              if (airingPage === 1) {
+                return;
+              } else {
+                setAiringPage(airingPage - 1);
+              }
+            }}
+          >
+            -
+          </button>
           <p>Page: {airingPage}</p>
           <button onClick={() => setAiringPage(airingPage + 1)}>+</button>
         </div>

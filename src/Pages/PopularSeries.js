@@ -38,7 +38,17 @@ export const PopularSeries = () => {
         })}
       </div>
       <div className="page">
-        <button onClick={() => setPopularPage(popularPage - 1)}>-</button>
+        <button
+          onClick={() => {
+            if (popularPage === 1) {
+              return;
+            } else {
+              setPopularPage(popularPage - 1);
+            }
+          }}
+        >
+          -
+        </button>
         <p>Page: {popularPage}</p>
         <button onClick={() => setPopularPage(popularPage + 1)}>+</button>
       </div>

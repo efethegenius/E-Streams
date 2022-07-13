@@ -38,7 +38,15 @@ export const Movies = () => {
           })}
         </div>
         <div className="page">
-          <button onClick={() => setNowPlayingPage(nowPlayingPage - 1)}>
+          <button
+            onClick={() => {
+              if (nowPlayingPage === 1) {
+                return;
+              } else {
+                setNowPlayingPage(nowPlayingPage - 1);
+              }
+            }}
+          >
             -
           </button>
           <p>Page: {nowPlayingPage}</p>

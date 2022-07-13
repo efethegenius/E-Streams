@@ -32,7 +32,17 @@ export const UpcomingMovies = () => {
         })}
       </div>
       <div className="page">
-        <button onClick={() => setUpcomingPage(upcomingPage - 1)}>-</button>
+        <button
+          onClick={() => {
+            if (upcomingPage === 1) {
+              return;
+            } else {
+              setUpcomingPage(upcomingPage - 1);
+            }
+          }}
+        >
+          -
+        </button>
         <p>Page: {upcomingPage}</p>
         <button onClick={() => setUpcomingPage(upcomingPage + 1)}>+</button>
       </div>
