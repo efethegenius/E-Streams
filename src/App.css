@@ -4,6 +4,69 @@
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
 }
+.avatar {
+  border-radius: 100px !important;
+  width: 42px !important;
+  cursor: pointer;
+  margin: unset !important;
+}
+.profile-avatar {
+  width: 80px !important;
+  border: 1px solid black;
+  box-shadow: 3.7px 1px 0.9px rgba(0, 0, 0, 0.015),
+    6.3px 1.7px 2.3px rgba(0, 0, 0, 0.022),
+    8.4px 2.3px 4.5px rgba(0, 0, 0, 0.028),
+    10.6px 2.8px 8px rgba(0, 0, 0, 0.032),
+    14.7px 4px 14.1px rgba(0, 0, 0, 0.038),
+    26.3px 7.1px 26px rgba(0, 0, 0, 0.045), 93px 25px 80px rgba(0, 0, 0, 0.06);
+}
+.profile-container {
+  background-color: rgba(0, 0, 0, 0.667);
+  backdrop-filter: blur(5px);
+  width: 100%;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition: all ease-in-out 0.5s;
+  left: 0;
+  z-index: 70 !important;
+}
+.show-profile {
+  opacity: 1;
+  visibility: unset;
+}
+.profile-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.profile-wrapper h1 {
+  font-size: 1.3rem;
+  margin: 10px 0;
+  color: white;
+}
+.profile-wrapper a {
+  margin: 10px 0;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  margin-right: 5px;
+  font-size: 0.9rem;
+}
+.profile-wrapper p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
 
 .title-container {
   /* background-color: red; */
@@ -14,6 +77,13 @@
   padding: 0 10px;
   flex-direction: column;
   margin-bottom: 15px;
+}
+
+.home-btn {
+  width: 25px !important;
+  border-radius: unset !important;
+  cursor: pointer;
+  margin: unset !important;
 }
 
 .page {
@@ -45,6 +115,10 @@
 ::-webkit-scrollbar-thumb {
   background: rgb(134, 130, 212);
   border-radius: 6px;
+}
+
+.active-page {
+  color: white !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {

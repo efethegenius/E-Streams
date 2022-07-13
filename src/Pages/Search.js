@@ -11,7 +11,7 @@ export const Search = () => {
       <div class="form">
         <input
           class="input"
-          placeholder="Search for Movies or TV series"
+          placeholder="Search for any Movies or TV series"
           required=""
           type="text"
           value={search}
