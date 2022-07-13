@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "../Components/Navbar";
 import { useFetch } from "../Components/useFetch";
+import { AuthContext } from "../helpers/AuthContext";
+import { Search } from "./Search";
 
 export const TvSeries = () => {
-  const url =
-    "https://api.themoviedb.org/3/tv/airing_today?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=1";
+  const { airingPage, setAiringPage } = useContext(AuthContext);
+  const url = `https://api.themoviedb.org/3/tv/airing_today?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=${airingPage}`;
 
   const img_path = "https://image.tmdb.org/t/p/w1280";
 
@@ -14,18 +16,7 @@ export const TvSeries = () => {
     <div className="movies-container">
       <Navbar />
       <div className="movie-wrapper">
-        <div className="search-container">
-          <div class="form">
-            <input
-              class="input"
-              placeholder="Search for Movies or TV series"
-              required=""
-              type="text"
-            />
-            <span class="input-border"></span>
-          </div>
-          <span class="input-border"></span>
-        </div>
+        <Search />
         <div className="title-container">
           <h3>Airing Today</h3>
         </div>
@@ -51,6 +42,11 @@ export const TvSeries = () => {
               </Link>
             );
           })}
+        </div>
+        <div className="page">
+          <button onClick={() => setAiringPage(airingPage - 1)}>-</button>
+          <p>Page: {airingPage}</p>
+          <button onClick={() => setAiringPage(airingPage + 1)}>+</button>
         </div>
       </div>
     </div>

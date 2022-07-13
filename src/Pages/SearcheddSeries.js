@@ -2,54 +2,57 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../Components/useFetch";
 import { useCastFetch } from "../Components/useCastFetch";
-import { Navbar } from "../Components/Navbar";
 import { useDetailsFetch } from "../Components/useDetailsFetch";
+import { useTvTrailerFetch } from "../Components/useTvTrailerFetch";
+import { Navbar } from "../Components/Navbar";
+import { FaLink, FaImdb, FaTrailer } from "react-icons/fa";
 import { AuthContext } from "../helpers/AuthContext";
-import { useTrailerFetch } from "../Components/useTrailerFetch";
 import ReactPlayer from "react-player";
-import { FaLink, FaImdb } from "react-icons/fa";
 // import { GoToTop } from "./GoToTop";
 
-export const UpcomingMovie = () => {
+export const SearchedSeries = () => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [rating, setRating] = useState("");
   const [overview, setOverview] = useState("");
-  const [releaseDate, setReleaseDate] = useState("");
-  const { upcomingPage, setUpcomingPage } = useContext(AuthContext);
+  const [firstAirDate, setFirstAirDate] = useState("");
+  const [lastAirDate, setLastAirDate] = useState("");
+  const { searchTerm, setSearchTerm } = useContext(AuthContext);
   const { id } = useParams();
 
-  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=${upcomingPage}`;
+  const url = `https://api.themoviedb.org/3/search/multi?api_key=04c35731a5ee918f014970082a0088b1&query=${
+    searchTerm ? searchTerm : "avengers"
+  }`;
 
-  const castUrl = `https://api.themoviedb.org/3/movie/${parseInt(
+  const castUrl = `https://api.themoviedb.org/3/tv/${parseInt(
     id
   )}/credits?api_key=04c35731a5ee918f014970082a0088b1`;
   const img_path = "https://image.tmdb.org/t/p/w1280";
-  const detailUrl = `https://api.themoviedb.org/3/movie/${parseInt(
+
+  const detailUrl = `https://api.themoviedb.org/3/tv/${parseInt(
     id
   )}?api_key=04c35731a5ee918f014970082a0088b1`;
-  const trailerUrl = `https://api.themoviedb.org/3/movie/${parseInt(
+  const tvTrailerUrl = `https://api.themoviedb.org/3/tv/${parseInt(
     id
   )}/videos?api_key=04c35731a5ee918f014970082a0088b1`;
 
   const { loading, data } = useFetch(url);
   const { loadingCast, cast } = useCastFetch(castUrl);
   const { loadingDetails, details } = useDetailsFetch(detailUrl);
-  const { loadingTrailer, trailer } = useTrailerFetch(trailerUrl);
+  const { loadingTvTrailer, tvTrailer } = useTvTrailerFetch(tvTrailerUrl);
 
   useEffect(() => {
     const trending = data.find((movie) => movie.id === parseInt(id));
     if (data.length > 0) {
-      setTitle(trending.title);
+      setTitle(trending.original_name);
       setImage(trending.poster_path);
       setRating(trending.vote_average);
       setOverview(trending.overview);
-      setReleaseDate(trending.release_date);
+      setFirstAirDate(trending.first_air_date);
+      setLastAirDate(trending.last_air_date);
     }
     return;
   }, [data, id]);
-
-  const newDate = new Date(releaseDate);
 
   return (
     <div className="movies-container single-movie-container">
@@ -75,16 +78,17 @@ export const UpcomingMovie = () => {
           </p>
           <div className="movie-stats">
             <div className="movie-stat">
-              <h5>Length</h5>
-              <p>{details.runtime + " min."}</p>
-            </div>
-            <div className="movie-stat">
               <h5>Language</h5>
               <p>{details.original_language}</p>
             </div>
             <div className="movie-stat">
-              <h5>Year</h5>
-              <p>{newDate.getFullYear()}</p>
+              <h5>First Air</h5>
+              <p>{details.first_air_date}</p>
+            </div>
+
+            <div className="movie-stat">
+              <h5>Last Air</h5>
+              <p>{details.last_air_date}</p>
             </div>
             <div className="movie-stat">
               <h5>Status</h5>
@@ -95,18 +99,20 @@ export const UpcomingMovie = () => {
             <h4>Overview</h4>
             <p className="overview">{overview}</p>
           </div>
+
           <div className="trailer-container">
-            <h4>Movie Clip</h4>
-            {trailer ? (
+            <h4>Series Clip</h4>
+            {tvTrailer ? (
               <ReactPlayer
-                url={`https://www.youtube.com/watch?v=${trailer.key}`}
+                url={`https://www.youtube.com/watch?v=${tvTrailer.key}`}
                 width="100%"
                 controls="true"
               />
             ) : (
-              <p>No Clip for this movie is available at the moment</p>
+              <p>No Clip for this series is available at the moment</p>
             )}
           </div>
+
           <div className="links-container">
             <a
               className="link"
@@ -116,16 +122,8 @@ export const UpcomingMovie = () => {
             >
               Website <FaLink />
             </a>
-
-            <a
-              className="link"
-              href={`https://www.imdb.com/title/${details.imdb_id}`}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              IMDB <FaImdb />
-            </a>
           </div>
+
           <div className="casts-container">
             <h4>Casts</h4>
             <div className="casts-wrapper">

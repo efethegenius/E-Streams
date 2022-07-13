@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../Components/useFetch";
 import { useCastFetch } from "../Components/useCastFetch";
+import { useTrailerFetch } from "../Components/useTrailerFetch";
 import { useDetailsFetch } from "../Components/useDetailsFetch";
 import { Navbar } from "../Components/Navbar";
 import { FaLink, FaImdb } from "react-icons/fa";
+import ReactPlayer from "react-player";
+import { AuthContext } from "../helpers/AuthContext";
 // import { GoToTop } from "./GoToTop";
 
 export const AiringToday = () => {
@@ -14,10 +17,10 @@ export const AiringToday = () => {
   const [overview, setOverview] = useState("");
   const [firstAirDate, setFirstAirDate] = useState("");
   const [lastAirDate, setLastAirDate] = useState("");
+  const { airingPage, setAiringPage } = useContext(AuthContext);
   const { id } = useParams();
 
-  const url =
-    "https://api.themoviedb.org/3/tv/airing_today?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=1";
+  const url = `https://api.themoviedb.org/3/tv/airing_today?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=${airingPage}`;
 
   const castUrl = `https://api.themoviedb.org/3/tv/${parseInt(
     id
@@ -27,9 +30,13 @@ export const AiringToday = () => {
   const detailUrl = `https://api.themoviedb.org/3/tv/${parseInt(
     id
   )}?api_key=04c35731a5ee918f014970082a0088b1`;
+  const trailerUrl = `https://api.themoviedb.org/3/tv/${parseInt(
+    id
+  )}/videos?api_key=04c35731a5ee918f014970082a0088b1`;
 
   const { loading, data } = useFetch(url);
   const { loadingCast, cast } = useCastFetch(castUrl);
+  const { loadingTrailer, trailer } = useTrailerFetch(trailerUrl);
   const { loadingDetails, details } = useDetailsFetch(detailUrl);
 
   useEffect(() => {
@@ -89,6 +96,19 @@ export const AiringToday = () => {
           <div className="overview-container">
             <h4>Overview</h4>
             <p className="overview">{overview}</p>
+          </div>
+
+          <div className="trailer-container">
+            <h4>Series Clip</h4>
+            {trailer ? (
+              <ReactPlayer
+                url={`https://www.youtube.com/watch?v=${trailer.key}`}
+                width="100%"
+                controls="true"
+              />
+            ) : (
+              <p>No Clip for this movie is available at the moment</p>
+            )}
           </div>
 
           <div className="links-container">

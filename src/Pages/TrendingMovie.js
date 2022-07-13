@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../Components/useFetch";
 import { useCastFetch } from "../Components/useCastFetch";
+import { useTrailerFetch } from "../Components/useTrailerFetch";
 import { useDetailsFetch } from "../Components/useDetailsFetch";
 import { Navbar } from "../Components/Navbar";
 import { FaLink, FaImdb } from "react-icons/fa";
+import ReactPlayer from "react-player";
 // import { GoToTop } from "./GoToTop";
 
 export const TrendingMovie = () => {
@@ -26,12 +28,14 @@ export const TrendingMovie = () => {
   const detailUrl = `https://api.themoviedb.org/3/movie/${parseInt(
     id
   )}?api_key=04c35731a5ee918f014970082a0088b1`;
+  const trailerUrl = `https://api.themoviedb.org/3/movie/${parseInt(
+    id
+  )}/videos?api_key=04c35731a5ee918f014970082a0088b1`;
 
   const { loading, data } = useFetch(url);
   const { loadingCast, cast } = useCastFetch(castUrl);
   const { loadingDetails, details } = useDetailsFetch(detailUrl);
-
-  console.log(cast);
+  const { loadingTrailer, trailer } = useTrailerFetch(trailerUrl);
 
   useEffect(() => {
     const trending = data.find((movie) => movie.id === parseInt(id));
@@ -46,6 +50,8 @@ export const TrendingMovie = () => {
   }, [data, id]);
 
   const newDate = new Date(releaseDate);
+
+  console.log(trailer);
 
   return (
     <div className="movies-container single-movie-container">
@@ -92,6 +98,18 @@ export const TrendingMovie = () => {
             <p className="overview">{overview}</p>
           </div>
 
+          <div className="trailer-container">
+            <h4>Movie Clip</h4>
+            {trailer ? (
+              <ReactPlayer
+                url={`https://www.youtube.com/watch?v=${trailer.key}`}
+                width="100%"
+                controls="true"
+              />
+            ) : (
+              <p>No Clip for this movie is available at the moment</p>
+            )}
+          </div>
           <div className="links-container">
             <a
               className="link"

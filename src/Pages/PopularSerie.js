@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../Components/useFetch";
 import { useCastFetch } from "../Components/useCastFetch";
 import { useDetailsFetch } from "../Components/useDetailsFetch";
+import { useTvTrailerFetch } from "../Components/useTvTrailerFetch";
 import { Navbar } from "../Components/Navbar";
-import { FaLink, FaImdb } from "react-icons/fa";
+import { FaLink, FaImdb, FaTrailer } from "react-icons/fa";
+import { AuthContext } from "../helpers/AuthContext";
+import ReactPlayer from "react-player";
 // import { GoToTop } from "./GoToTop";
 
 export const PopularSerie = () => {
@@ -14,10 +17,10 @@ export const PopularSerie = () => {
   const [overview, setOverview] = useState("");
   const [firstAirDate, setFirstAirDate] = useState("");
   const [lastAirDate, setLastAirDate] = useState("");
+  const { popularPage, setPopularPage } = useContext(AuthContext);
   const { id } = useParams();
 
-  const url =
-    "https://api.themoviedb.org/3/tv/popular?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=1";
+  const url = `https://api.themoviedb.org/3/tv/popular?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=${popularPage}`;
 
   const castUrl = `https://api.themoviedb.org/3/tv/${parseInt(
     id
@@ -27,10 +30,14 @@ export const PopularSerie = () => {
   const detailUrl = `https://api.themoviedb.org/3/tv/${parseInt(
     id
   )}?api_key=04c35731a5ee918f014970082a0088b1`;
+  const tvTrailerUrl = `https://api.themoviedb.org/3/tv/${parseInt(
+    id
+  )}/videos?api_key=04c35731a5ee918f014970082a0088b1`;
 
   const { loading, data } = useFetch(url);
   const { loadingCast, cast } = useCastFetch(castUrl);
   const { loadingDetails, details } = useDetailsFetch(detailUrl);
+  const { loadingTvTrailer, tvTrailer } = useTvTrailerFetch(tvTrailerUrl);
 
   useEffect(() => {
     const trending = data.find((movie) => movie.id === parseInt(id));
@@ -89,6 +96,19 @@ export const PopularSerie = () => {
           <div className="overview-container">
             <h4>Overview</h4>
             <p className="overview">{overview}</p>
+          </div>
+
+          <div className="trailer-container">
+            <h4>Series Clip</h4>
+            {tvTrailer ? (
+              <ReactPlayer
+                url={`https://www.youtube.com/watch?v=${tvTrailer.key}`}
+                width="100%"
+                controls="true"
+              />
+            ) : (
+              <p>No Clip for this series is available at the moment</p>
+            )}
           </div>
 
           <div className="links-container">

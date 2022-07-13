@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFetch } from "../Components/useFetch";
 import { Navbar } from "../Components/Navbar";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../helpers/AuthContext";
+import { Search } from "./Search";
 
 export const Movies = () => {
-  const [nowPlayingPage, setNowPlayingPage] = useState(1);
+  const { nowPlayingPage, setNowPlayingPage } = useContext(AuthContext);
   const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=${nowPlayingPage}`;
   const img_path = "https://image.tmdb.org/t/p/w1280";
 
@@ -13,18 +15,7 @@ export const Movies = () => {
     <div className="movies-container">
       <Navbar />
       <div className="movie-wrapper">
-        <div className="search-container">
-          <div class="form">
-            <input
-              class="input"
-              placeholder="Search for Movies or TV series"
-              required=""
-              type="text"
-            />
-            <span class="input-border"></span>
-          </div>
-          <span class="input-border"></span>
-        </div>
+        <Search />
         <div className="title-container">
           <h3>Now Playing</h3>
         </div>
@@ -36,7 +27,7 @@ export const Movies = () => {
             return (
               <Link to={`/now_playing/${id}`} className="show-link">
                 <div key={id} className="series">
-                  <img src={img_path + poster_path} alt="image" />
+                  <img src={img_path + poster_path} alt="movie" />
                   <div className="show-details">
                     <p>{newDate.getFullYear()}</p>
                     <h4>{title}</h4>
@@ -45,15 +36,15 @@ export const Movies = () => {
               </Link>
             );
           })}
-          <div>
-            <button onClick={() => setNowPlayingPage(nowPlayingPage - 1)}>
-              -
-            </button>
-            <p>Page: {nowPlayingPage}</p>
-            <button onClick={() => setNowPlayingPage(nowPlayingPage + 1)}>
-              +
-            </button>
-          </div>
+        </div>
+        <div className="page">
+          <button onClick={() => setNowPlayingPage(nowPlayingPage - 1)}>
+            -
+          </button>
+          <p>Page: {nowPlayingPage}</p>
+          <button onClick={() => setNowPlayingPage(nowPlayingPage + 1)}>
+            +
+          </button>
         </div>
       </div>
     </div>

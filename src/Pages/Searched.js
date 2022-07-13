@@ -2,29 +2,33 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useFetch } from "../Components/useFetch";
 import { useCastFetch } from "../Components/useCastFetch";
-import { Navbar } from "../Components/Navbar";
 import { useDetailsFetch } from "../Components/useDetailsFetch";
-import { AuthContext } from "../helpers/AuthContext";
+import { Navbar } from "../Components/Navbar";
 import { useTrailerFetch } from "../Components/useTrailerFetch";
-import ReactPlayer from "react-player";
 import { FaLink, FaImdb } from "react-icons/fa";
+import { AuthContext } from "../helpers/AuthContext";
+import ReactPlayer from "react-player";
+
 // import { GoToTop } from "./GoToTop";
 
-export const UpcomingMovie = () => {
+export const Searched = () => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [rating, setRating] = useState("");
-  const [overview, setOverview] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
-  const { upcomingPage, setUpcomingPage } = useContext(AuthContext);
+  const [overview, setOverview] = useState("");
   const { id } = useParams();
+  const { searchTerm, setSearchTerm } = useContext(AuthContext);
 
-  const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=${upcomingPage}`;
+  const url = `https://api.themoviedb.org/3/search/multi?api_key=04c35731a5ee918f014970082a0088b1&query=${
+    searchTerm ? searchTerm : "avengers"
+  }`;
 
   const castUrl = `https://api.themoviedb.org/3/movie/${parseInt(
     id
   )}/credits?api_key=04c35731a5ee918f014970082a0088b1`;
   const img_path = "https://image.tmdb.org/t/p/w1280";
+
   const detailUrl = `https://api.themoviedb.org/3/movie/${parseInt(
     id
   )}?api_key=04c35731a5ee918f014970082a0088b1`;
@@ -36,6 +40,8 @@ export const UpcomingMovie = () => {
   const { loadingCast, cast } = useCastFetch(castUrl);
   const { loadingDetails, details } = useDetailsFetch(detailUrl);
   const { loadingTrailer, trailer } = useTrailerFetch(trailerUrl);
+
+  console.log(details);
 
   useEffect(() => {
     const trending = data.find((movie) => movie.id === parseInt(id));
@@ -107,6 +113,7 @@ export const UpcomingMovie = () => {
               <p>No Clip for this movie is available at the moment</p>
             )}
           </div>
+
           <div className="links-container">
             <a
               className="link"
@@ -126,6 +133,7 @@ export const UpcomingMovie = () => {
               IMDB <FaImdb />
             </a>
           </div>
+
           <div className="casts-container">
             <h4>Casts</h4>
             <div className="casts-wrapper">

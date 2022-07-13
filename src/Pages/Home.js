@@ -5,24 +5,14 @@ import { TrendingMovies } from "./TrendingMovies";
 import { UpcomingMovies } from "./UpcomingMovies";
 
 import { Navbar } from "../Components/Navbar";
+import { Search } from "./Search";
 
 export const Home = () => {
   return (
     <div className="movies-container">
       <Navbar />
       <div className="movie-wrapper">
-        <div className="search-container">
-          <div class="form">
-            <input
-              class="input"
-              placeholder="Search for Movies or TV series"
-              required=""
-              type="text"
-            />
-            <span class="input-border"></span>
-          </div>
-          <span class="input-border"></span>
-        </div>
+        <Search />
         <div className="title-container">
           <h3>Trending</h3>
         </div>

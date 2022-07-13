@@ -6,6 +6,25 @@
   max-width: 350px;
 }
 
+.trailer-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 30px;
+  /* background-color: rebeccapurple; */
+}
+
+.trailer-container h4 {
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.trailer-container p {
+  align-self: flex-start;
+}
+
 .single-movie-container {
   padding: 0 10px !important;
 }
